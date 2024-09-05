@@ -22,12 +22,12 @@ public class RestController {
         return "Coach: " + coachName + ", Team Name: " + teamName;
     }
 
-    @GetMapping("workout")
-    public String getDailyWarkout() {
+    @GetMapping("/workout")
+    public String getDailyWorkout() {
         return "Run a hard 5k!";
     }
 
-    @GetMapping("fortune")
+    @GetMapping("/fortune")
     public String getDailyFortune() {
         return "Today is your lucky day.";
     }
