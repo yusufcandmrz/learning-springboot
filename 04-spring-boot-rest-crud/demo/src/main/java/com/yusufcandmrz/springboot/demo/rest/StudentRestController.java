@@ -2,6 +2,8 @@ package com.yusufcandmrz.springboot.demo.rest;
 
 import com.yusufcandmrz.springboot.demo.entity.Student;
 import jakarta.annotation.PostConstruct;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -28,6 +30,10 @@ public class StudentRestController {
 
     @GetMapping("/students/{studentId}")
     public Student getStudentById(@PathVariable int studentId) {
+
+        if (studentId < 0 || studentId > students.size()) {
+            throw new StudentNotFoundException("student id is not found -> " + studentId);
+        }
         return students.get(studentId);
     }
 }
