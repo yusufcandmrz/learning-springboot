@@ -8,17 +8,17 @@ public class Employee {
 
     @Column(name = "id")
     @Id
-    @GeneratedValue
-    int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @Column(name = "first_name")
-    String firstName;
+    private String firstName;
 
     @Column(name = "last_name")
-    String lastName;
+    private String lastName;
 
     @Column(name = "email")
-    String email;
+    private String email;
 
     public Employee() {
     }
