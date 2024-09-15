@@ -36,7 +36,7 @@ public class EmployeeServiceImp implements EmployeeService {
 
     @Transactional
     @Override
-    public void delete(int employeeId) {
+    public void deleteById(int employeeId) {
         employeeDAO.delete(employeeId);
     }
 
