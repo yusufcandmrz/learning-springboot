@@ -9,6 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootApplication()
@@ -31,11 +32,66 @@ public class CruddemoApplication {
 
             // deleteInstructorDetailById(appDAO);
 
-            createInstructorWithCourses(appDAO);
+            // createInstructorWithCourseList(appDAO);
+
+            // getInstructorWithCourseListById(appDAO);
+
+            // getCourseListByInstructorId(appDAO);
+
+            // updateConstructor(appDAO);
+
+            // getCourseById(appDAO);
+
+            // updateCourse(appDAO);
+
+            deleteCourseById(appDAO);
         };
     }
 
-    private void createInstructorWithCourses(AppDAO appDAO) {
+    private void deleteCourseById(AppDAO appDAO) {
+        int courseId = 10;
+        appDAO.deleteCourseById(courseId);
+        System.out.println("Course deleted");
+    }
+
+    private void updateCourse(AppDAO appDAO) {
+        int courseId = 10;
+        Course course = appDAO.getCourseById(courseId);
+        course.setTitle("How to Debugging in Kotlin");
+        appDAO.updateCourse(course);
+        System.out.println("Course updated");
+    }
+
+    private void getCourseById(AppDAO appDAO) {
+        int courseId = 10;
+        Course course = appDAO.getCourseById(courseId);
+        System.out.println("Course information: " + course);
+    }
+
+    private void updateConstructor(AppDAO appDAO) {
+        int instructorId = 1;
+        Instructor instructor = appDAO.getInstructorById(instructorId);
+        instructor.setFirstName("Furkan");
+        instructor.setLastName("Ocalan");
+        appDAO.updateInstructor(instructor);
+        System.out.println("Instructor updated");
+    }
+
+    private void getCourseListByInstructorId(AppDAO appDAO) {
+        int instructorId = 1;
+        Instructor instructor = appDAO.getInstructorById(instructorId);
+        List<Course> courseList = appDAO.getCourseListByInstructorId(instructorId);
+        instructor.setCourseList(courseList);
+        System.out.println(instructor.getCourseList());
+    }
+
+    private void getInstructorWithCourseListById(AppDAO appDAO) {
+        int instructorId = 1;
+        Instructor instructor = appDAO.getInstructorById(instructorId);
+        System.out.println("Instructor information: " + instructor);
+    }
+
+    private void createInstructorWithCourseList(AppDAO appDAO) {
         Instructor instructor = new Instructor("Tolunay", "Ozturk", "tolunayozturk@example.com");
         InstructorDetail instructorDetail = new InstructorDetail("www.youtube.com/tolunayozturk", "debugging code");
         Course courseOne = new Course("How to Debugging in Java");

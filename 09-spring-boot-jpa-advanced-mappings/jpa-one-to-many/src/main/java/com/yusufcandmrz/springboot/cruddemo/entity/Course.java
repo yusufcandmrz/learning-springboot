@@ -17,6 +17,10 @@ public class Course {
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private Instructor instructor;
 
+    public Course() {
+
+    }
+
     public Course(String title) {
         this.title = title;
     }
