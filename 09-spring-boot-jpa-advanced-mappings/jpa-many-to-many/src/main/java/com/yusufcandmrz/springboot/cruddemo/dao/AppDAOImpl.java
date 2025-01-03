@@ -3,11 +3,13 @@ package com.yusufcandmrz.springboot.cruddemo.dao;
 import com.yusufcandmrz.springboot.cruddemo.entity.Course;
 import com.yusufcandmrz.springboot.cruddemo.entity.Instructor;
 import com.yusufcandmrz.springboot.cruddemo.entity.InstructorDetail;
+import com.yusufcandmrz.springboot.cruddemo.entity.Student;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
+import java.lang.reflect.Type;
 import java.util.List;
 
 @Repository
@@ -98,7 +100,7 @@ public class AppDAOImpl implements AppDAO {
 
     @Override
     @Transactional
-    public void createCourseWithReviewList(Course course) {
+    public void createCourse(Course course) {
         entityManager.persist(course);
     }
 
@@ -107,5 +109,32 @@ public class AppDAOImpl implements AppDAO {
         TypedQuery<Course> query = entityManager.createQuery("from Course course JOIN FETCH course.reviewList where course.id = :data", Course.class);
         query.setParameter("data", id);
         return query.getSingleResult();
+    }
+
+    @Override
+    public Course getCourseWithStudentListById(int id) {
+        TypedQuery<Course> query = entityManager.createQuery("from Course course JOIN FETCH course.studentList where course.id = :data", Course.class);
+        query.setParameter("data", id);
+        return query.getSingleResult();
+    }
+
+    @Override
+    public Student getStudentWithCourseListById(int id) {
+        TypedQuery<Student> query = entityManager.createQuery("from Student student JOIN FETCH student.courseList where student.id = :data", Student.class);
+        query.setParameter("data", id);
+        return query.getSingleResult();
+    }
+
+    @Override
+    @Transactional
+    public void updateStudent(Student student) {
+        entityManager.merge(student);
+    }
+
+    @Override
+    @Transactional
+    public void deleteStudentById(int id) {
+        Student student = entityManager.find(Student.class, id);
+        entityManager.remove(student);
     }
 }

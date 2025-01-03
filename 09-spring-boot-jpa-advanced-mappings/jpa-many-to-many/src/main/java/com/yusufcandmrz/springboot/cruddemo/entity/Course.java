@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "course")
 public class Course {
 
     @Column(name = "id")
@@ -26,7 +27,7 @@ public class Course {
 
     @JoinTable(name = "course_student", joinColumns = @JoinColumn(name = "course_id"), inverseJoinColumns = @JoinColumn(name = "student_id"))
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    private List<Student> student;
+    private List<Student> studentList;
 
     public Course() {
     }
@@ -74,12 +75,19 @@ public class Course {
         reviewList.add(review);
     }
 
-    public List<Student> getStudent() {
-        return student;
+    public List<Student> getStudentList() {
+        return studentList;
     }
 
-    public void setStudent(List<Student> student) {
-        this.student = student;
+    public void setStudentList(List<Student> studentList) {
+        this.studentList = studentList;
+    }
+
+    public void addStudent(Student student) {
+        if (studentList == null) {
+            studentList = new ArrayList<>();
+        }
+        studentList.add(student);
     }
 
     @Override

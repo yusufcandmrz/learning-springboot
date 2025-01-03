@@ -3,6 +3,7 @@ package com.yusufcandmrz.springboot.cruddemo.dao;
 import com.yusufcandmrz.springboot.cruddemo.entity.Course;
 import com.yusufcandmrz.springboot.cruddemo.entity.Instructor;
 import com.yusufcandmrz.springboot.cruddemo.entity.InstructorDetail;
+import com.yusufcandmrz.springboot.cruddemo.entity.Student;
 
 import java.util.List;
 
@@ -31,7 +32,15 @@ public interface AppDAO {
 
     public void deleteCourseById(int id);
 
-    public void createCourseWithReviewList(Course course);
+    public void createCourse(Course course);
 
     public Course getCourseWithReviewListById(int id);
+
+    public Course getCourseWithStudentListById(int id);
+
+    public Student getStudentWithCourseListById(int id);
+
+    public void updateStudent(Student student);
+
+    public void deleteStudentById(int id);
 }

@@ -1,10 +1,7 @@
 package com.yusufcandmrz.springboot.cruddemo;
 
 import com.yusufcandmrz.springboot.cruddemo.dao.AppDAO;
-import com.yusufcandmrz.springboot.cruddemo.entity.Course;
-import com.yusufcandmrz.springboot.cruddemo.entity.Instructor;
-import com.yusufcandmrz.springboot.cruddemo.entity.InstructorDetail;
-import com.yusufcandmrz.springboot.cruddemo.entity.Review;
+import com.yusufcandmrz.springboot.cruddemo.entity.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -45,12 +42,64 @@ public class CruddemoApplication {
 
             // updateCourse(appDAO);
 
-            deleteCourseById(appDAO);
+            // deleteCourseById(appDAO);
 
             // createCourseWithReviewList(appDAO);
 
             // getCourseWithReviewListById(appDAO);
+
+            // createCourseWithStudentList(appDAO);
+
+            // getCourseWithStudentListById(appDAO);
+
+            // updateStudent(appDAO);
+
+            // getStudentWithCourseListById(appDAO);
+
+            deleteStudentById(appDAO);
         };
+    }
+
+    private void deleteStudentById(AppDAO appDAO) {
+        int studentId = 1;
+        appDAO.deleteStudentById(studentId);
+        System.out.println("Student deleted");
+    }
+
+    private void updateStudent(AppDAO appDAO) {
+        int studentId = 1;
+        Student student = appDAO.getStudentWithCourseListById(studentId);
+
+        Course courseOne = new Course("Boxing");
+        Course courseTwo = new Course("Kick-boxing");
+
+        student.addCourse(courseOne);
+        student.addCourse(courseTwo);
+
+        appDAO.updateStudent(student);
+    }
+
+    private void getStudentWithCourseListById(AppDAO appDAO) {
+        int studentId = 1;
+        Student student = appDAO.getStudentWithCourseListById(studentId);
+        System.out.println("Student informationg: " + student);
+        System.out.println("CourseList: " + student.getCourseList());
+    }
+
+    private void getCourseWithStudentListById(AppDAO appDAO) {
+        int courseId = 11;
+        Course course = appDAO.getCourseWithStudentListById(courseId);
+        System.out.println("Course information: " + course);
+        System.out.println("StudentList: " + course.getStudentList());
+    }
+
+    private void createCourseWithStudentList(AppDAO appDAO) {
+        Course course = new Course("Bodybuilding");
+        Student studentOne = new Student("Seyfullah", "Gundogdu", "seyfullahgundogdu@example.com");
+        Student studentTwo = new Student("Alperen", "Kildir", "alperenkildir@example.com");
+        course.addStudent(studentOne);
+        course.addStudent(studentTwo);
+        appDAO.createCourse(course);
     }
 
     private void getCourseWithReviewListById(AppDAO appDAO) {
@@ -65,7 +114,7 @@ public class CruddemoApplication {
         course.addReview(new Review("What a course!!!"));
         course.addReview(new Review("It's a waste of time"));
         course.addReview(new Review("Thanks for the course"));
-        appDAO.createCourseWithReviewList(course);
+        appDAO.createCourse(course);
     }
 
     private void deleteCourseById(AppDAO appDAO) {

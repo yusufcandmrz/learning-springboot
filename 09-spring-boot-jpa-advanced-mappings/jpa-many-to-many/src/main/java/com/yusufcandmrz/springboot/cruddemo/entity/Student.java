@@ -2,6 +2,7 @@ package com.yusufcandmrz.springboot.cruddemo.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -9,8 +10,8 @@ import java.util.List;
 public class Student {
 
     @Column(name = "id")
-    @Id
-    @GeneratedValue
+    @Id()
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "first_name")
@@ -23,7 +24,7 @@ public class Student {
     private String email;
 
     @JoinTable(name = "course_student", joinColumns = @JoinColumn(name = "student_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Course> courseList;
 
     public Student() {
@@ -66,6 +67,21 @@ public class Student {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Course> getCourseList() {
+        return courseList;
+    }
+
+    public void setCourseList(List<Course> courseList) {
+        this.courseList = courseList;
+    }
+
+    public void addCourse(Course course) {
+        if (courseList == null) {
+            courseList = new ArrayList<>();
+        }
+        courseList.add(course);
     }
 
     @Override
