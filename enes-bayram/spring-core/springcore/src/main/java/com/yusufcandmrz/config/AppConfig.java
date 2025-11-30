@@ -1,6 +1,6 @@
 package com.yusufcandmrz.config;
 
-import com.yusufcandmrz.model.User;
+import com.yusufcandmrz.entity.User;
 import com.yusufcandmrz.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.yusufcandmrz.model;
+package com.yusufcandmrz.entity;
 
 import lombok.*;
 

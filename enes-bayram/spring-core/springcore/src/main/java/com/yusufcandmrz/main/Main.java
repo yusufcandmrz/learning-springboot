@@ -1,7 +1,7 @@
 package com.yusufcandmrz.main;
 
 import com.yusufcandmrz.config.AppConfig;
-import com.yusufcandmrz.model.User;
+import com.yusufcandmrz.entity.User;
 import com.yusufcandmrz.service.UserService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

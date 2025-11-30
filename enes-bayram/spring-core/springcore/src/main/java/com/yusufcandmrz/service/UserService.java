@@ -1,6 +1,6 @@
 package com.yusufcandmrz.service;
 
-import com.yusufcandmrz.model.User;
+import com.yusufcandmrz.entity.User;
 import lombok.Getter;
 import lombok.Setter;
 
