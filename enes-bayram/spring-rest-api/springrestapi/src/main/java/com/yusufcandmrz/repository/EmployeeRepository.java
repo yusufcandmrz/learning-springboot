@@ -24,4 +24,8 @@ public class EmployeeRepository {
     public void addEmployee(Employee employee) {
         this.employeeList.add(employee);
     }
+
+    public void deleteEmployee(Employee employee) {
+        this.employeeList.remove(employee);
+    }
 }

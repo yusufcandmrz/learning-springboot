@@ -30,4 +30,9 @@ public class EmployeeController {
     public void addEmployee(@RequestParam String fullName) {
         employeeService.addEmployee(fullName);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteEmployeeById(@RequestParam String id) {
+        employeeService.deleteEmployeeById(id);
+    }
 }

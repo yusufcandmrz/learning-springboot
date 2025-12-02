@@ -1,5 +1,4 @@
 package com.yusufcandmrz.service;
-
 import com.yusufcandmrz.entity.Employee;
 import com.yusufcandmrz.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
@@ -28,5 +27,10 @@ public class EmployeeService {
     public void addEmployee(String fullName) {
         String id = String.valueOf(nextEmployeeId.getAndIncrement());
         employeeRepository.addEmployee(new Employee(id, fullName));
+    }
+
+    public void deleteEmployeeById(String id) {
+        Employee employee = getEmployeeById(id);
+        employeeRepository.deleteEmployee(employee);
     }
 }
