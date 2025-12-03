@@ -4,14 +4,19 @@ import com.yusufcandmrz.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Repository
 public class EmployeeRepository {
 
-    @Autowired
-    private List<Employee> employeeList;
+    private List<Employee> employeeList = new ArrayList<>(List.of(
+            new Employee("1", "Yusuf Demiroz"),
+            new Employee("2", "Taha Huseyin Demiroz"),
+            new Employee("3", "Muhammet Demiroz"),
+            new Employee("4", "Sait Demiroz")
+    ));
 
     public List<Employee> getEmployeeList() {
         return this.employeeList;
@@ -25,7 +30,14 @@ public class EmployeeRepository {
         this.employeeList.add(employee);
     }
 
-    public void deleteEmployee(Employee employee) {
-        this.employeeList.remove(employee);
+    public void deleteEmployee(String id) {
+        employeeList.removeIf(e -> e.getId().equals(id));
     }
+
+    public void updateEmployee(String id, String fullName) {
+        Employee employee = getEmployeeById(id)
+                .orElseThrow(() -> new RuntimeException("Employee not found: " + id));
+        employee.setFullName(fullName);
+    }
+
 }

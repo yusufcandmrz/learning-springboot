@@ -1,4 +1,6 @@
 package com.yusufcandmrz.service;
+
+import com.yusufcandmrz.dto.UpdateEmployeeRequest;
 import com.yusufcandmrz.entity.Employee;
 import com.yusufcandmrz.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
@@ -21,7 +23,7 @@ public class EmployeeService {
     }
 
     public Employee getEmployeeById(String id) {
-        return employeeRepository.getEmployeeById(id).orElseThrow(() -> new RuntimeException("No employee found"));
+        return employeeRepository.getEmployeeById(id).orElseThrow(() -> new RuntimeException("Employee not found: " + id));
     }
 
     public void addEmployee(String fullName) {
@@ -30,7 +32,11 @@ public class EmployeeService {
     }
 
     public void deleteEmployeeById(String id) {
-        Employee employee = getEmployeeById(id);
-        employeeRepository.deleteEmployee(employee);
+        employeeRepository.deleteEmployee(id);
     }
+
+    public void updateEmployee(String id, UpdateEmployeeRequest request) {
+        employeeRepository.updateEmployee(id, request.getFullName());
+    }
+
 }

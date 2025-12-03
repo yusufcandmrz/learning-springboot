@@ -1,5 +1,6 @@
 package com.yusufcandmrz.controller;
 
+import com.yusufcandmrz.dto.UpdateEmployeeRequest;
 import com.yusufcandmrz.entity.Employee;
 import com.yusufcandmrz.service.EmployeeService;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +33,12 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteEmployeeById(@RequestParam String id) {
+    public void deleteEmployeeById(@PathVariable String id) {
         employeeService.deleteEmployeeById(id);
+    }
+
+    @PutMapping("/{id}")
+    public void updateEmployee(@PathVariable String id, @RequestBody UpdateEmployeeRequest request) {
+        employeeService.updateEmployee(id, request);
     }
 }
