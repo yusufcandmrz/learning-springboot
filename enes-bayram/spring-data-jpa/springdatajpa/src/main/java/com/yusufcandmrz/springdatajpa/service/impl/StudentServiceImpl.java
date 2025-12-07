@@ -32,7 +32,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<StudentDto> readAllStudents() {
-        return studentRepository.findAll().stream().map(student -> {
+        return studentRepository.findAllStudents().stream().map(student -> {
             StudentDto studentDto = new StudentDto();
             BeanUtils.copyProperties(student, studentDto);
             return studentDto;
@@ -62,7 +62,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     private Student findStudentById(Integer id) {
-        return studentRepository.findById(id).orElseThrow(() -> new RuntimeException("Student not found"));
+        return studentRepository.findStudentById(id).orElseThrow(() -> new RuntimeException("Student not found"));
     }
 
 }
