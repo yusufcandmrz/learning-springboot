@@ -40,4 +40,11 @@ public class StudentServiceImpl implements StudentService {
         dbStudent.setBirthOfDate(student.getBirthOfDate());
         studentRepository.save(dbStudent);
     }
+
+    @Override
+    public void deleteStudentById(Integer id) {
+        Student dbStudent = readStudentById(id);
+        studentRepository.delete(dbStudent);
+    }
+
 }
