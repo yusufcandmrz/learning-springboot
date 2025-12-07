@@ -11,4 +11,6 @@ public interface StudentService {
     public List<Student> readAllStudents();
 
     public Student readStudentById(Integer id);
+
+    public void updateStudentById(Integer id, Student student);
 }

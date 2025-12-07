@@ -32,4 +32,12 @@ public class StudentServiceImpl implements StudentService {
     public Student readStudentById(Integer id) {
         return studentRepository.findById(id).orElseThrow(() -> new RuntimeException("Student not found"));
     }
+
+    @Override
+    public void updateStudentById(Integer id, Student student) {
+        Student dbStudent = readStudentById(id);
+        dbStudent.setFullName(student.getFullName());
+        dbStudent.setBirthOfDate(student.getBirthOfDate());
+        studentRepository.save(dbStudent);
+    }
 }
