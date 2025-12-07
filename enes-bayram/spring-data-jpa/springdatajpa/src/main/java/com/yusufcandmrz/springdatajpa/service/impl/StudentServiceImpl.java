@@ -27,4 +27,9 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> readAllStudents() {
         return studentRepository.findAll();
     }
+
+    @Override
+    public Student readStudentById(Integer id) {
+        return studentRepository.findById(id).orElseThrow(() -> new RuntimeException("Student not found"));
+    }
 }

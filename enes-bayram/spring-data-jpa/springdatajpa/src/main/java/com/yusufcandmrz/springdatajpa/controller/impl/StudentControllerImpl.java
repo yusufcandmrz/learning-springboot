@@ -28,4 +28,10 @@ public class StudentControllerImpl implements StudentController {
     public List<Student> readAllStudents() {
         return studentService.readAllStudents();
     }
+
+    @Override
+    @GetMapping("/{id}")
+    public Student readStudentById(@PathVariable Integer id) {
+        return studentService.readStudentById(id);
+    }
 }

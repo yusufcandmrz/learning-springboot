@@ -9,4 +9,6 @@ public interface StudentController {
     public void createStudent(Student student);
 
     public List<Student> readAllStudents();
+
+    public Student readStudentById(Integer id);
 }
