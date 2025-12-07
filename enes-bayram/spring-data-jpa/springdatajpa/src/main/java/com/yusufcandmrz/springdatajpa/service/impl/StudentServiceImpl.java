@@ -1,5 +1,6 @@
 package com.yusufcandmrz.springdatajpa.service.impl;
 
+import com.fasterxml.jackson.databind.util.BeanUtil;
 import com.yusufcandmrz.springdatajpa.dto.StudentDto;
 import com.yusufcandmrz.springdatajpa.dto.StudentDtoIU;
 import com.yusufcandmrz.springdatajpa.entity.Student;
@@ -39,13 +40,16 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student readStudentById(Integer id) {
-        return studentRepository.findById(id).orElseThrow(() -> new RuntimeException("Student not found"));
+    public StudentDto readStudentById(Integer id) {
+        StudentDto studentDto = new StudentDto();
+        Student student = findStudentById(id);
+        BeanUtils.copyProperties(student, studentDto);
+        return studentDto;
     }
 
     @Override
     public void updateStudentById(Integer id, Student student) {
-        Student dbStudent = readStudentById(id);
+        Student dbStudent = findStudentById(id);
         dbStudent.setFullName(student.getFullName());
         dbStudent.setBirthOfDate(student.getBirthOfDate());
         studentRepository.save(dbStudent);
@@ -53,8 +57,12 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void deleteStudentById(Integer id) {
-        Student dbStudent = readStudentById(id);
+        Student dbStudent = findStudentById(id);
         studentRepository.delete(dbStudent);
+    }
+
+    private Student findStudentById(Integer id) {
+        return studentRepository.findById(id).orElseThrow(() -> new RuntimeException("Student not found"));
     }
 
 }

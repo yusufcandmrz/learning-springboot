@@ -33,7 +33,7 @@ public class StudentControllerImpl implements StudentController {
 
     @Override
     @GetMapping("/{id}")
-    public Student readStudentById(@PathVariable Integer id) {
+    public StudentDto readStudentById(@PathVariable Integer id) {
         return studentService.readStudentById(id);
     }
 

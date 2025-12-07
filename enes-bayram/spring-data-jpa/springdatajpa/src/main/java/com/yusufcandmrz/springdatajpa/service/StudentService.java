@@ -12,7 +12,7 @@ public interface StudentService {
 
     public List<StudentDto> readAllStudents();
 
-    public Student readStudentById(Integer id);
+    public StudentDto readStudentById(Integer id);
 
     public void updateStudentById(Integer id, Student student);
 
