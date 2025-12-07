@@ -1,8 +1,11 @@
 package com.yusufcandmrz.springdatajpa.service.impl;
 
+import com.yusufcandmrz.springdatajpa.dto.StudentDto;
+import com.yusufcandmrz.springdatajpa.dto.StudentDtoIU;
 import com.yusufcandmrz.springdatajpa.entity.Student;
 import com.yusufcandmrz.springdatajpa.repository.StudentRepository;
 import com.yusufcandmrz.springdatajpa.service.StudentService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +22,9 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void createStudent(Student student) {
+    public void createStudent(StudentDtoIU studentDtoIU) {
+        Student student = new Student();
+        BeanUtils.copyProperties(studentDtoIU, student);
         studentRepository.save(student);
     }
 

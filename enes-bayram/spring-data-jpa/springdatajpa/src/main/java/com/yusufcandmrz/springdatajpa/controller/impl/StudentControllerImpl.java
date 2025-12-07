@@ -1,6 +1,7 @@
 package com.yusufcandmrz.springdatajpa.controller.impl;
 
 import com.yusufcandmrz.springdatajpa.controller.StudentController;
+import com.yusufcandmrz.springdatajpa.dto.StudentDtoIU;
 import com.yusufcandmrz.springdatajpa.entity.Student;
 import com.yusufcandmrz.springdatajpa.service.StudentService;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +20,8 @@ public class StudentControllerImpl implements StudentController {
 
     @Override
     @PostMapping()
-    public void createStudent(@RequestBody Student student) {
-        studentService.createStudent(student);
+    public void createStudent(@RequestBody StudentDtoIU studentDtoIU) {
+        studentService.createStudent(studentDtoIU);
     }
 
     @Override
