@@ -1,5 +1,6 @@
 package com.yusufcandmrz.springdatajpa.service;
 
+import com.yusufcandmrz.springdatajpa.dto.StudentDto;
 import com.yusufcandmrz.springdatajpa.dto.StudentDtoIU;
 import com.yusufcandmrz.springdatajpa.entity.Student;
 
@@ -9,7 +10,7 @@ public interface StudentService {
 
     public void createStudent(StudentDtoIU student);
 
-    public List<Student> readAllStudents();
+    public List<StudentDto> readAllStudents();
 
     public Student readStudentById(Integer id);
 

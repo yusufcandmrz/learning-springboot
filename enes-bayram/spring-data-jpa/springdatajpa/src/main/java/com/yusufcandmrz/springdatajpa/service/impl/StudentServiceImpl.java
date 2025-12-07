@@ -9,6 +9,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,8 +30,12 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<Student> readAllStudents() {
-        return studentRepository.findAll();
+    public List<StudentDto> readAllStudents() {
+        return studentRepository.findAll().stream().map(student -> {
+            StudentDto studentDto = new StudentDto();
+            BeanUtils.copyProperties(student, studentDto);
+            return studentDto;
+        }).toList();
     }
 
     @Override
