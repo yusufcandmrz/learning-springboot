@@ -48,10 +48,10 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void updateStudentById(Integer id, Student student) {
+    public void updateStudentById(Integer id, StudentDtoIU studentDtoIU) {
         Student dbStudent = findStudentById(id);
-        dbStudent.setFullName(student.getFullName());
-        dbStudent.setBirthOfDate(student.getBirthOfDate());
+        dbStudent.setFullName(studentDtoIU.getFullName());
+        dbStudent.setBirthOfDate(studentDtoIU.getBirthOfDate());
         studentRepository.save(dbStudent);
     }
 

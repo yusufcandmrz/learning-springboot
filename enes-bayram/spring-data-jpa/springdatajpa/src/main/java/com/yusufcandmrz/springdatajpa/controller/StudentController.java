@@ -14,7 +14,7 @@ public interface StudentController {
 
     public StudentDto readStudentById(Integer id);
 
-    public void updateStudentById(Integer id, Student student);
+    public void updateStudentById(Integer id, StudentDtoIU studentDtoIU);
 
     public void deleteStudentById(Integer id);
 }
