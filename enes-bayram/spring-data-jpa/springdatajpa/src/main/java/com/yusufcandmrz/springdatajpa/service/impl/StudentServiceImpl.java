@@ -52,6 +52,8 @@ public class StudentServiceImpl implements StudentService {
         Student dbStudent = findStudentById(id);
         dbStudent.setFullName(studentDtoIU.getFullName());
         dbStudent.setBirthOfDate(studentDtoIU.getBirthOfDate());
+        dbStudent.setEmail(studentDtoIU.getEmail());
+        dbStudent.setIdentityNumber(studentDtoIU.getIdentityNumber());
         studentRepository.save(dbStudent);
     }
 

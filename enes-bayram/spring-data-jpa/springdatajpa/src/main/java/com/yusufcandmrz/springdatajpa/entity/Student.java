@@ -22,4 +22,10 @@ public class Student {
 
     @Column(name = "birth_of_date")
     private LocalDate birthOfDate;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "identity_number")
+    private String identityNumber;
 }

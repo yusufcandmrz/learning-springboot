@@ -5,6 +5,7 @@ import com.yusufcandmrz.springdatajpa.dto.StudentDto;
 import com.yusufcandmrz.springdatajpa.dto.StudentDtoIU;
 import com.yusufcandmrz.springdatajpa.entity.Student;
 import com.yusufcandmrz.springdatajpa.service.StudentService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class StudentControllerImpl implements StudentController {
 
     @Override
     @PostMapping()
-    public void createStudent(@RequestBody StudentDtoIU studentDtoIU) {
+    public void createStudent(@RequestBody @Valid StudentDtoIU studentDtoIU) {
         studentService.createStudent(studentDtoIU);
     }
 
@@ -39,7 +40,7 @@ public class StudentControllerImpl implements StudentController {
 
     @Override
     @PutMapping("/{id}")
-    public void updateStudentById(@PathVariable Integer id, @RequestBody StudentDtoIU studentDtoIU) {
+    public void updateStudentById(@PathVariable Integer id, @RequestBody @Valid StudentDtoIU studentDtoIU) {
         studentService.updateStudentById(id, studentDtoIU);
     }
 
