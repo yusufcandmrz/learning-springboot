@@ -1,11 +1,13 @@
 package com.yusufcandmrz.springdatajpa.service.impl;
 
-import com.fasterxml.jackson.databind.util.BeanUtil;
 import com.yusufcandmrz.springdatajpa.dto.StudentDto;
 import com.yusufcandmrz.springdatajpa.dto.StudentDtoIU;
+import com.yusufcandmrz.springdatajpa.dto.StudentProfileDtoIU;
 import com.yusufcandmrz.springdatajpa.entity.Student;
+import com.yusufcandmrz.springdatajpa.entity.StudentProfile;
 import com.yusufcandmrz.springdatajpa.repository.StudentRepository;
 import com.yusufcandmrz.springdatajpa.service.StudentService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,8 +65,16 @@ public class StudentServiceImpl implements StudentService {
         studentRepository.delete(dbStudent);
     }
 
+    @Transactional
+    @Override
+    public void addStudentProfile(Integer studentId, StudentProfileDtoIU studentProfileDtoIU) {
+        Student dbStudent = findStudentById(studentId);
+        StudentProfile profile = new StudentProfile();
+        profile.setAddress(studentProfileDtoIU.getAddress());
+        dbStudent.addProfile(profile);
+    }
+
     private Student findStudentById(Integer id) {
         return studentRepository.findStudentById(id).orElseThrow(() -> new RuntimeException("Student not found"));
     }
-
 }

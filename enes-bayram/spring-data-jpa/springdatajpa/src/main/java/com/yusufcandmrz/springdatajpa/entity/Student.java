@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Table(name = "student")
 @Entity
@@ -28,4 +29,16 @@ public class Student {
 
     @Column(name = "identity_number")
     private String identityNumber;
+
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @JoinColumn(name = "profile_id")
+    private StudentProfile profile;
+
+    public void addProfile(StudentProfile profile) {
+        Objects.requireNonNull(profile, "StudentProfile cannot be null");
+        if (this.getProfile() != null) {
+            throw new RuntimeException("Student already has a profile");
+        }
+        this.profile = profile;
+    }
 }

@@ -3,6 +3,7 @@ package com.yusufcandmrz.springdatajpa.controller.impl;
 import com.yusufcandmrz.springdatajpa.controller.StudentController;
 import com.yusufcandmrz.springdatajpa.dto.StudentDto;
 import com.yusufcandmrz.springdatajpa.dto.StudentDtoIU;
+import com.yusufcandmrz.springdatajpa.dto.StudentProfileDtoIU;
 import com.yusufcandmrz.springdatajpa.entity.Student;
 import com.yusufcandmrz.springdatajpa.service.StudentService;
 import jakarta.validation.Valid;
@@ -48,5 +49,11 @@ public class StudentControllerImpl implements StudentController {
     @DeleteMapping("/{id}")
     public void deleteStudentById(@PathVariable Integer id) {
         studentService.deleteStudentById(id);
+    }
+
+    @Override
+    @PostMapping("/{id}/profile")
+    public void addStudentProfile(@PathVariable Integer id, @RequestBody StudentProfileDtoIU studentProfileDtoIU) {
+        studentService.addStudentProfile(id, studentProfileDtoIU);
     }
 }
