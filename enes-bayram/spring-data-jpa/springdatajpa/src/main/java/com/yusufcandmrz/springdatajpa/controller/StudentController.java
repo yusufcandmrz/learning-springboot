@@ -2,9 +2,7 @@ package com.yusufcandmrz.springdatajpa.controller;
 
 import com.yusufcandmrz.springdatajpa.dto.StudentDto;
 import com.yusufcandmrz.springdatajpa.dto.StudentDtoIU;
-import com.yusufcandmrz.springdatajpa.dto.StudentProfileDtoIU;
-import com.yusufcandmrz.springdatajpa.entity.Student;
-
+import com.yusufcandmrz.springdatajpa.dto.StudentProfileDto;
 import java.util.List;
 
 public interface StudentController {
@@ -19,5 +17,5 @@ public interface StudentController {
 
     public void deleteStudentById(Integer id);
 
-    public void addStudentProfile(Integer Id, StudentProfileDtoIU studentProfileDtoIU);
+    public void addStudentProfile(Integer Id, StudentProfileDto studentProfileDto);
 }

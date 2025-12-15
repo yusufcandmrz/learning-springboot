@@ -3,8 +3,7 @@ package com.yusufcandmrz.springdatajpa.controller.impl;
 import com.yusufcandmrz.springdatajpa.controller.StudentController;
 import com.yusufcandmrz.springdatajpa.dto.StudentDto;
 import com.yusufcandmrz.springdatajpa.dto.StudentDtoIU;
-import com.yusufcandmrz.springdatajpa.dto.StudentProfileDtoIU;
-import com.yusufcandmrz.springdatajpa.entity.Student;
+import com.yusufcandmrz.springdatajpa.dto.StudentProfileDto;
 import com.yusufcandmrz.springdatajpa.service.StudentService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
@@ -53,7 +52,7 @@ public class StudentControllerImpl implements StudentController {
 
     @Override
     @PostMapping("/{id}/profile")
-    public void addStudentProfile(@PathVariable Integer id, @RequestBody StudentProfileDtoIU studentProfileDtoIU) {
-        studentService.addStudentProfile(id, studentProfileDtoIU);
+    public void addStudentProfile(@PathVariable Integer id, @RequestBody StudentProfileDto studentProfileDto) {
+        studentService.addStudentProfile(id, studentProfileDto);
     }
 }

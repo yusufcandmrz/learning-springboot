@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class StudentProfileDtoIU {
+public class StudentProfileDto {
 
     private String address;
 }

@@ -2,7 +2,7 @@ package com.yusufcandmrz.springdatajpa.service.impl;
 
 import com.yusufcandmrz.springdatajpa.dto.StudentDto;
 import com.yusufcandmrz.springdatajpa.dto.StudentDtoIU;
-import com.yusufcandmrz.springdatajpa.dto.StudentProfileDtoIU;
+import com.yusufcandmrz.springdatajpa.dto.StudentProfileDto;
 import com.yusufcandmrz.springdatajpa.entity.Student;
 import com.yusufcandmrz.springdatajpa.entity.StudentProfile;
 import com.yusufcandmrz.springdatajpa.repository.StudentRepository;
@@ -12,7 +12,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -67,10 +66,10 @@ public class StudentServiceImpl implements StudentService {
 
     @Transactional
     @Override
-    public void addStudentProfile(Integer studentId, StudentProfileDtoIU studentProfileDtoIU) {
+    public void addStudentProfile(Integer studentId, StudentProfileDto studentProfileDto) {
         Student dbStudent = findStudentById(studentId);
         StudentProfile profile = new StudentProfile();
-        profile.setAddress(studentProfileDtoIU.getAddress());
+        profile.setAddress(studentProfileDto.getAddress());
         dbStudent.addProfile(profile);
     }
 
