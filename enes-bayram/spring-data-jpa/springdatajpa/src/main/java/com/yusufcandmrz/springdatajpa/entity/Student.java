@@ -34,6 +34,10 @@ public class Student {
     @JoinColumn(name = "profile_id")
     private StudentProfile profile;
 
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
+
     public void addProfile(StudentProfile profile) {
         Objects.requireNonNull(profile, "StudentProfile cannot be null");
         if (this.getProfile() != null) {
