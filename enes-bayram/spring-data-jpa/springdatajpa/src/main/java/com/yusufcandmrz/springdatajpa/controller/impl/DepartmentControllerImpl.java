@@ -2,23 +2,28 @@ package com.yusufcandmrz.springdatajpa.controller.impl;
 
 import com.yusufcandmrz.springdatajpa.controller.DepartmentController;
 import com.yusufcandmrz.springdatajpa.dto.DepartmentDto;
-import com.yusufcandmrz.springdatajpa.entity.Department;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.yusufcandmrz.springdatajpa.service.DepartmentService;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/department")
 public class DepartmentControllerImpl implements DepartmentController {
 
+    DepartmentService departmentService;
 
-    @Override
-    @PostMapping
-    public void createDepartment(DepartmentDto departmentDto) {
+    public DepartmentControllerImpl(DepartmentService departmentService) {
+        this.departmentService = departmentService;
     }
 
     @Override
-    public Department getDepartmentById(Integer id) {
-        return null;
+    @PostMapping
+    public void createDepartment(@RequestBody DepartmentDto departmentDto) {
+        departmentService.createDepartment(departmentDto);
+    }
+
+    @Override
+    @GetMapping("/{id}")
+    public DepartmentDto getDepartmentById(@PathVariable Integer id) {
+        return departmentService.getDepartmentById(id);
     }
 }

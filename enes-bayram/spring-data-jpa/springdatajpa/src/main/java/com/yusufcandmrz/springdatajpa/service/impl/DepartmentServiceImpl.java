@@ -21,7 +21,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public void createDepartment(DepartmentDto departmentDto) {
         Department department = new Department();
-        department.setName(departmentDto.getName());
+        BeanUtils.copyProperties(departmentDto, department);
         departmentRepository.save(department);
     }
 
