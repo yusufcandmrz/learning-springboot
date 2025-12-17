@@ -26,4 +26,6 @@ public class StudentDtoIU {
     @Size(min = 11, max = 11)
     @NotBlank
     private String identityNumber;
+
+    private Integer departmentId;
 }

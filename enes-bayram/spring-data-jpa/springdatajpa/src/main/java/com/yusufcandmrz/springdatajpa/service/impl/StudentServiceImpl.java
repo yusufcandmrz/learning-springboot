@@ -3,8 +3,10 @@ package com.yusufcandmrz.springdatajpa.service.impl;
 import com.yusufcandmrz.springdatajpa.dto.StudentDto;
 import com.yusufcandmrz.springdatajpa.dto.StudentDtoIU;
 import com.yusufcandmrz.springdatajpa.dto.StudentProfileDto;
+import com.yusufcandmrz.springdatajpa.entity.Department;
 import com.yusufcandmrz.springdatajpa.entity.Student;
 import com.yusufcandmrz.springdatajpa.entity.StudentProfile;
+import com.yusufcandmrz.springdatajpa.repository.DepartmentRepository;
 import com.yusufcandmrz.springdatajpa.repository.StudentRepository;
 import com.yusufcandmrz.springdatajpa.service.StudentService;
 import jakarta.transaction.Transactional;
@@ -18,16 +20,21 @@ import java.util.List;
 public class StudentServiceImpl implements StudentService {
 
     StudentRepository studentRepository;
+    DepartmentRepository departmentRepository;
 
     @Autowired
-    public StudentServiceImpl(StudentRepository studentRepository) {
+    public StudentServiceImpl(StudentRepository studentRepository,
+                              DepartmentRepository departmentRepository) {
         this.studentRepository = studentRepository;
+        this.departmentRepository = departmentRepository;
     }
 
     @Override
     public void createStudent(StudentDtoIU studentDtoIU) {
+        Department dbDepartment = findDepartmentById(studentDtoIU.getDepartmentId());
         Student student = new Student();
         BeanUtils.copyProperties(studentDtoIU, student);
+        student.setDepartment(dbDepartment);
         studentRepository.save(student);
     }
 
@@ -55,6 +62,7 @@ public class StudentServiceImpl implements StudentService {
         dbStudent.setBirthOfDate(studentDtoIU.getBirthOfDate());
         dbStudent.setEmail(studentDtoIU.getEmail());
         dbStudent.setIdentityNumber(studentDtoIU.getIdentityNumber());
+        dbStudent.setDepartment(findDepartmentById(studentDtoIU.getDepartmentId()));
         studentRepository.save(dbStudent);
     }
 
@@ -75,5 +83,9 @@ public class StudentServiceImpl implements StudentService {
 
     private Student findStudentById(Integer id) {
         return studentRepository.findStudentById(id).orElseThrow(() -> new RuntimeException("Student not found"));
+    }
+
+    private Department findDepartmentById(Integer id) {
+        return departmentRepository.findById(id).orElseThrow(() -> new RuntimeException("Department not found"));
     }
 }
