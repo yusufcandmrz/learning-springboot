@@ -19,6 +19,8 @@ import java.util.List;
 @Service
 public class StudentServiceImpl implements StudentService {
 
+    //TODO: Is your way to implement Department is correct?
+
     StudentRepository studentRepository;
     DepartmentRepository departmentRepository;
 
@@ -29,12 +31,13 @@ public class StudentServiceImpl implements StudentService {
         this.departmentRepository = departmentRepository;
     }
 
+    @Transactional
     @Override
     public void createStudent(StudentDtoIU studentDtoIU) {
         Department dbDepartment = findDepartmentById(studentDtoIU.getDepartmentId());
         Student student = new Student();
         BeanUtils.copyProperties(studentDtoIU, student);
-        student.setDepartment(dbDepartment);
+        student.assignDepartment(dbDepartment);
         studentRepository.save(student);
     }
 
@@ -55,6 +58,7 @@ public class StudentServiceImpl implements StudentService {
         return studentDto;
     }
 
+    @Transactional
     @Override
     public void updateStudentById(Integer id, StudentDtoIU studentDtoIU) {
         Student dbStudent = findStudentById(id);
@@ -62,8 +66,7 @@ public class StudentServiceImpl implements StudentService {
         dbStudent.setBirthOfDate(studentDtoIU.getBirthOfDate());
         dbStudent.setEmail(studentDtoIU.getEmail());
         dbStudent.setIdentityNumber(studentDtoIU.getIdentityNumber());
-        dbStudent.setDepartment(findDepartmentById(studentDtoIU.getDepartmentId()));
-        studentRepository.save(dbStudent);
+        dbStudent.assignDepartment(findDepartmentById(studentDtoIU.getDepartmentId()));
     }
 
     @Override
