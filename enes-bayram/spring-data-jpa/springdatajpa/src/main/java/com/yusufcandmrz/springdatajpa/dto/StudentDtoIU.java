@@ -27,5 +27,6 @@ public class StudentDtoIU {
     @NotBlank
     private String identityNumber;
 
+    @NotBlank
     private Integer departmentId;
 }
