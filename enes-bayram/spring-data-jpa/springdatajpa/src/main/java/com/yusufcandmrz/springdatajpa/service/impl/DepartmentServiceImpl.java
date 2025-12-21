@@ -26,7 +26,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public DepartmentDto getDepartmentById(Integer id) {
+    public DepartmentDto readDepartmentById(Integer id) {
         DepartmentDto departmentDto = new DepartmentDto();
         BeanUtils.copyProperties(findDepartmentById(id), departmentDto);
         return departmentDto;

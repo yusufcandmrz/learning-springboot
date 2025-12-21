@@ -6,5 +6,5 @@ public interface DepartmentController {
 
     public void createDepartment(DepartmentDto departmentDto);
 
-    public DepartmentDto getDepartmentById(Integer id);
+    public DepartmentDto readDepartmentById(Integer id);
 }

@@ -23,7 +23,7 @@ public class DepartmentControllerImpl implements DepartmentController {
 
     @Override
     @GetMapping("/{id}")
-    public DepartmentDto getDepartmentById(@PathVariable Integer id) {
-        return departmentService.getDepartmentById(id);
+    public DepartmentDto readDepartmentById(@PathVariable Integer id) {
+        return departmentService.readDepartmentById(id);
     }
 }
