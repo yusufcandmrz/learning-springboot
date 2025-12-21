@@ -18,5 +18,7 @@ public interface StudentController {
 
     public void deleteStudentById(Integer id);
 
-    public void addStudentProfile(Integer Id, StudentProfileDto studentProfileDto);
+    public void addStudentProfile(Integer id, StudentProfileDto studentProfileDto);
+
+    public void addCourse(Integer studentId, Integer courseId);
 }

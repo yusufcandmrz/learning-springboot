@@ -52,7 +52,13 @@ public class StudentControllerImpl implements StudentController {
 
     @Override
     @PostMapping("/{id}/profile")
-    public void addStudentProfile(@PathVariable Integer id, @RequestBody StudentProfileDto studentProfileDto) {
+    public void addStudentProfile(@PathVariable Integer id, @RequestBody @Valid StudentProfileDto studentProfileDto) {
         studentService.addStudentProfile(id, studentProfileDto);
+    }
+
+    @Override
+    @PostMapping("/{studentId}/course")
+    public void addCourse(@PathVariable Integer studentId, @RequestParam Integer courseId) {
+        studentService.addCourse(studentId, courseId);
     }
 }

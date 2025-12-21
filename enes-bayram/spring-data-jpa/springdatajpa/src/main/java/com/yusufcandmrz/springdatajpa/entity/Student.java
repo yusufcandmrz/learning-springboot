@@ -61,6 +61,7 @@ public class Student {
     }
 
     public void addCourse(Course course) {
+        Objects.requireNonNull(course, "Course cannot be null");
         StudentCourse studentCourse = new StudentCourse(this, course);
         studentCourseList.add(studentCourse);
         course.getStudentCourseList().add(studentCourse);

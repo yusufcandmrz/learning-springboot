@@ -3,9 +3,11 @@ package com.yusufcandmrz.springdatajpa.service.impl;
 import com.yusufcandmrz.springdatajpa.dto.StudentDto;
 import com.yusufcandmrz.springdatajpa.dto.StudentDtoIU;
 import com.yusufcandmrz.springdatajpa.dto.StudentProfileDto;
+import com.yusufcandmrz.springdatajpa.entity.Course;
 import com.yusufcandmrz.springdatajpa.entity.Department;
 import com.yusufcandmrz.springdatajpa.entity.Student;
 import com.yusufcandmrz.springdatajpa.entity.StudentProfile;
+import com.yusufcandmrz.springdatajpa.repository.CourseRepository;
 import com.yusufcandmrz.springdatajpa.repository.DepartmentRepository;
 import com.yusufcandmrz.springdatajpa.repository.StudentRepository;
 import com.yusufcandmrz.springdatajpa.service.StudentService;
@@ -19,16 +21,17 @@ import java.util.List;
 @Service
 public class StudentServiceImpl implements StudentService {
 
-    //TODO: Is your way to implement Department is correct?
-
     StudentRepository studentRepository;
     DepartmentRepository departmentRepository;
+    CourseRepository courseRepository;
 
     @Autowired
     public StudentServiceImpl(StudentRepository studentRepository,
-                              DepartmentRepository departmentRepository) {
+                              DepartmentRepository departmentRepository,
+                              CourseRepository courseRepository) {
         this.studentRepository = studentRepository;
         this.departmentRepository = departmentRepository;
+        this.courseRepository = courseRepository;
     }
 
     @Transactional
@@ -84,11 +87,23 @@ public class StudentServiceImpl implements StudentService {
         dbStudent.addProfile(profile);
     }
 
+    @Transactional
+    @Override
+    public void addCourse(Integer studentId, Integer courseId) {
+        Student dbStudent = findStudentById(studentId);
+        Course dbCourse = findCourseById(courseId);
+        dbStudent.addCourse(dbCourse);
+    }
+
     private Student findStudentById(Integer id) {
         return studentRepository.findStudentById(id).orElseThrow(() -> new RuntimeException("Student not found"));
     }
 
     private Department findDepartmentById(Integer id) {
         return departmentRepository.findById(id).orElseThrow(() -> new RuntimeException("Department not found"));
+    }
+
+    private Course findCourseById(Integer id) {
+        return courseRepository.findById(id).orElseThrow(() -> new RuntimeException("Course not found"));
     }
 }

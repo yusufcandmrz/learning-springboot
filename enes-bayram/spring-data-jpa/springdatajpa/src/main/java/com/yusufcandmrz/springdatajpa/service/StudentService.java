@@ -19,4 +19,6 @@ public interface StudentService {
     public void deleteStudentById(Integer id);
 
     public void addStudentProfile(Integer studentId, StudentProfileDto studentProfileDto);
+
+    public void addCourse(Integer studentId, Integer courseId);
 }
