@@ -1,9 +1,13 @@
 package com.yusufcandmrz.springdatajpa.entity;
 
+import com.yusufcandmrz.springdatajpa.exception.BaseException;
+import com.yusufcandmrz.springdatajpa.exception.ErrorMessage;
+import com.yusufcandmrz.springdatajpa.exception.MessageType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.lang.model.type.ErrorType;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +54,7 @@ public class Student {
     public void addProfile(StudentProfile profile) {
         Objects.requireNonNull(profile, "StudentProfile cannot be null");
         if (this.getProfile() != null) {
-            throw new RuntimeException("Student already has a profile");
+            throw new BaseException(new ErrorMessage(MessageType.STUDENT_ALREADY_HAS_A_PROFILE));
         }
         this.profile = profile;
     }

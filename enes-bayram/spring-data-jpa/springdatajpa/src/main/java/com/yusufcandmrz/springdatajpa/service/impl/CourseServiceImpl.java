@@ -2,6 +2,9 @@ package com.yusufcandmrz.springdatajpa.service.impl;
 
 import com.yusufcandmrz.springdatajpa.dto.CourseDto;
 import com.yusufcandmrz.springdatajpa.entity.Course;
+import com.yusufcandmrz.springdatajpa.exception.BaseException;
+import com.yusufcandmrz.springdatajpa.exception.ErrorMessage;
+import com.yusufcandmrz.springdatajpa.exception.MessageType;
 import com.yusufcandmrz.springdatajpa.repository.CourseRepository;
 import com.yusufcandmrz.springdatajpa.service.CourseService;
 import org.springframework.beans.BeanUtils;
@@ -32,6 +35,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     private Course findCourseById(Integer id) {
-        return courseRepository.findById(id).orElseThrow(() -> new RuntimeException("Course not found"));
+        return courseRepository.findById(id).orElseThrow(() ->
+                new BaseException(new ErrorMessage(MessageType.COURSE_NOT_FOUND)));
     }
 }

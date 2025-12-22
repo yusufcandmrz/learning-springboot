@@ -2,6 +2,9 @@ package com.yusufcandmrz.springdatajpa.service.impl;
 
 import com.yusufcandmrz.springdatajpa.dto.DepartmentDto;
 import com.yusufcandmrz.springdatajpa.entity.Department;
+import com.yusufcandmrz.springdatajpa.exception.BaseException;
+import com.yusufcandmrz.springdatajpa.exception.ErrorMessage;
+import com.yusufcandmrz.springdatajpa.exception.MessageType;
 import com.yusufcandmrz.springdatajpa.repository.DepartmentRepository;
 import com.yusufcandmrz.springdatajpa.service.DepartmentService;
 import org.springframework.beans.BeanUtils;
@@ -33,6 +36,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     private Department findDepartmentById(Integer id) {
-        return departmentRepository.findById(id).orElseThrow(() -> new RuntimeException("Department not found"));
+        return departmentRepository.findById(id).orElseThrow(() ->
+                new BaseException(new ErrorMessage(MessageType.DEPARTMENT_NOT_FOUND)));
     }
 }

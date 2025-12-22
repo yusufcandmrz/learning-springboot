@@ -7,6 +7,9 @@ import com.yusufcandmrz.springdatajpa.entity.Course;
 import com.yusufcandmrz.springdatajpa.entity.Department;
 import com.yusufcandmrz.springdatajpa.entity.Student;
 import com.yusufcandmrz.springdatajpa.entity.StudentProfile;
+import com.yusufcandmrz.springdatajpa.exception.BaseException;
+import com.yusufcandmrz.springdatajpa.exception.ErrorMessage;
+import com.yusufcandmrz.springdatajpa.exception.MessageType;
 import com.yusufcandmrz.springdatajpa.repository.CourseRepository;
 import com.yusufcandmrz.springdatajpa.repository.DepartmentRepository;
 import com.yusufcandmrz.springdatajpa.repository.StudentRepository;
@@ -96,14 +99,17 @@ public class StudentServiceImpl implements StudentService {
     }
 
     private Student findStudentById(Integer id) {
-        return studentRepository.findStudentById(id).orElseThrow(() -> new RuntimeException("Student not found"));
+        return studentRepository.findStudentById(id).orElseThrow(() ->
+                new BaseException(new ErrorMessage(MessageType.STUDENT_NOT_FOUND)));
     }
 
     private Department findDepartmentById(Integer id) {
-        return departmentRepository.findById(id).orElseThrow(() -> new RuntimeException("Department not found"));
+        return departmentRepository.findById(id).orElseThrow(() ->
+                new BaseException(new ErrorMessage(MessageType.DEPARTMENT_NOT_FOUND)));
     }
 
     private Course findCourseById(Integer id) {
-        return courseRepository.findById(id).orElseThrow(() -> new RuntimeException("Course not found"));
+        return courseRepository.findById(id).orElseThrow(() ->
+                new BaseException(new ErrorMessage(MessageType.COURSE_NOT_FOUND)));
     }
 }
