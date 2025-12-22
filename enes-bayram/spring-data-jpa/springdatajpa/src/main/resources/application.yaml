@@ -20,9 +20,3 @@ app:
   serverList[0]:
     location: TR
     ip: 192.168.1.1
-  serverList[1]:
-    location: SE
-    ip: 192.168.1.2
-  serverList[2]:
-    location: ES
-    ip: 192.168.1.3
